@@ -1,0 +1,11 @@
+.reviews-container {
+    position: relative;
+    min-height: 100vh; /* Set minimum height to fill the viewport */
+}
+
+.reviews-container .text-center {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+}
