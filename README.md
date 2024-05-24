@@ -27,12 +27,15 @@ This repository contains the frontend code for a movie review web application bu
    cd movie-review-app-frontend
 
 3. **Install dependencies:**
+   
    ```bash
    npm install
-  or
+   ```
+   or
+
    ```bash
-       yarn install
-```
+   yarn install
+   ```
 ## Configuration
 ### **ngrok Setup:**
 
@@ -50,23 +53,23 @@ ngrok will provide a URL like `https://<random-string>.ngrok.io.` Copy this URL.
 
 3. **Update axiosConfig.js:**
 
-Open `axiosConfig.js` (found in src/api).
+Open `axiosConfig.js` (found in `src/api`).
 Replace `https://beb8-109-185-76-100.ngrok-free.app` with the ngrok URL you copied.
 
-##Usage
-Start the development server:
+## Usage
+1. **Start the development server:**
 
-Bash
+```bash
 npm start 
-Folosește codul cu precauție.
-content_copy
+```
 or
 
-Bash
+```bash
 yarn start
-Folosește codul cu precauție.
-content_copy
-Open in browser: Your app should automatically open at http://localhost:3000. If not, open this URL in your browser.
+```
 
-Contributing
+2. **Open in browser:**
+Your app should automatically open at http://localhost:3000. If not, open this URL in your browser.
+
+## Contributing
 If you'd like to contribute, please fork the repository and create a pull request.
