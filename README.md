@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Movie Review Web App - Frontend (React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the frontend code for a movie review web application built with React. Users can browse movies, watch trailers, and write reviews.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Contributing](#contributing)
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Node.js and npm (or yarn):** Make sure you have Node.js and either npm or yarn installed. You can download them from the official website: [https://nodejs.org/](https://nodejs.org/)
+- **ngrok:** You will need ngrok to expose your local development server to the internet. Download and install it from: [https://ngrok.com/download](https://ngrok.com/download)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. **Clone the repository:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone <your-repository-url>
+Navigate to the project directory:
 
-### `npm run build`
+Bash
+cd movie-review-app-frontend
+Folosește codul cu precauție.
+content_copy
+Install dependencies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Bash
+npm install 
+Folosește codul cu precauție.
+content_copy
+or
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Bash
+yarn install
+Folosește codul cu precauție.
+content_copy
+Configuration
+ngrok Setup:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Start ngrok: Open a terminal and run: ngrok http 3000 (or whatever port your React app is using).
+Copy ngrok URL: ngrok will provide a URL like https://<random-string>.ngrok.io. Copy this URL.
+Update axiosConfig.js:
 
-### `npm run eject`
+Open axiosConfig.js (found in src/api).
+Replace https://beb8-109-185-76-100.ngrok-free.app with the ngrok URL you copied.
+Usage
+Start the development server:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Bash
+npm start 
+Folosește codul cu precauție.
+content_copy
+or
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Bash
+yarn start
+Folosește codul cu precauție.
+content_copy
+Open in browser: Your app should automatically open at http://localhost:3000. If not, open this URL in your browser.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributing
+If you'd like to contribute, please fork the repository and create a pull request.
