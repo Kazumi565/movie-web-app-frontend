@@ -20,7 +20,7 @@ This repository contains the frontend code for a movie review web application bu
 1. **Clone the repository:**
 
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/Kazumi565/movie-web-app-frontend
 
 2. **Navigate to the project directory:**
    ```bash
