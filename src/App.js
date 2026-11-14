@@ -1,6 +1,6 @@
 import './App.css';
 import api from './api/axiosConfig';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import Layout from './components/Layout';
 import {Routes, Route} from 'react-router-dom';
 import Home from './components/home/Home';
@@ -31,7 +31,7 @@ function App() {
     }
   }
 
-  const getMovieData = async (movieId) => {
+  const getMovieData = useCallback(async (movieId) => {
      
     try 
     {
@@ -41,7 +41,7 @@ function App() {
 
         setMovie(singleMovie);
 
-        setReviews(singleMovie.reviews);
+        setReviews(singleMovie?.reviews || []);
         
 
     } 
@@ -50,7 +50,7 @@ function App() {
       console.error(error);
     }
 
-  }
+  }, []);
 
   useEffect(() => {
     getMovies();

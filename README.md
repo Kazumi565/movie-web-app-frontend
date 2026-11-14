@@ -1,75 +1,54 @@
-# Movie Review Web App - Frontend (React)
+# Movie Review Frontend
 
-This repository contains the frontend code for a movie review web application built with React. Users can browse movies, watch trailers, and write reviews.
+A React app for browsing movies, watching trailers and leaving reviews. It works with the
+[Spring Boot API](https://github.com/Kazumi565/movie-web-app-backend).
 
-## Table of Contents
+## Run locally
 
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Contributing](#contributing)
+Install Node.js and npm, then:
 
-## Prerequisites
-
-- **Node.js and npm (or yarn):** Make sure you have Node.js and either npm or yarn installed. You can download them from the official website: [https://nodejs.org/](https://nodejs.org/)
-- **ngrok:** You will need ngrok to expose your local development server to the internet. Download and install it from: [https://ngrok.com/download](https://ngrok.com/download)
-
-## Installation
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/Kazumi565/movie-web-app-frontend
-
-2. **Navigate to the project directory:**
-   ```bash
-   cd movie-review-app-frontend
-
-3. **Install dependencies:**
-   
-   ```bash
-   npm install
-   ```
-   or
-
-   ```bash
-   yarn install
-   ```
-## Configuration
-### **ngrok Setup:**
-
-1. **Start ngrok:**
-
-Open a terminal and run:
-```bash
-ngrok http 3000
-```
-(or whatever port your React app is using).
-
-2. **Copy ngrok URL:**
-ngrok will provide a URL like `https://<random-string>.ngrok.io.` Copy this URL.
-
-
-3. **Update axiosConfig.js:**
-
-Open `axiosConfig.js` (found in `src/api`).
-Replace `https://beb8-109-185-76-100.ngrok-free.app` with the ngrok URL you copied.
-
-## Usage
-1. **Start the development server:**
-
-```bash
-npm start 
-```
-or
-
-```bash
-yarn start
+```sh
+git clone https://github.com/Kazumi565/movie-web-app-frontend.git
+cd movie-web-app-frontend
+npm ci
+npm start
 ```
 
-2. **Open in browser:**
-Your app should automatically open at http://localhost:3000. If not, open this URL in your browser.
+Start the backend and import its sample movie catalogue first. Open
+`http://localhost:3000`; the API defaults to `http://localhost:8080`. Movie images
+and trailers require access to their external hosts. No ngrok tunnel is required.
 
-## Contributing
-If you'd like to contribute, please fork the repository and create a pull request.
+## API configuration
+
+Copy `.env.example` to `.env.local` to override the API address:
+
+```dotenv
+REACT_APP_API_URL=http://localhost:8080
+```
+
+Restart the development server after changing this setting. Create React App
+embeds this address at build time, so rebuild for a different deployed backend.
+Never put secrets in `REACT_APP_` variables: they are visible in the browser.
+Configure the backend's `CORS_ALLOWED_ORIGINS` to match the frontend's exact origin.
+
+## Review flow
+
+The form trims whitespace and rejects empty reviews. It disables submission
+while saving, then adds the saved review to the list. If the request fails,
+your draft stays in place so you can try again.
+
+## Verify
+
+```sh
+npm test -- --watchAll=false --runInBand
+npm run build
+```
+
+The interaction tests mock the API and cover successful saves, failure recovery,
+empty input, and pending duplicate submissions. `build/` contains the production
+bundle. A static host must route client-side paths such as `/Reviews/tt3915174`
+back to `index.html`.
+
+This local demo still uses Create React App. The toolchain needs a separate
+dependency review and migration plan. There are no user accounts or review
+moderation.

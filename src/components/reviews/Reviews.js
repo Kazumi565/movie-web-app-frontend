@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import api from '../../api/axiosConfig';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -6,33 +6,39 @@ import ReviewForm from '../reviewForm/ReviewForm';
 
 const Reviews = ({ getMovieData, movie, reviews, setReviews }) => {
   const revText = useRef();
+  const pending = useRef(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const { movieId } = useParams();
 
   useEffect(() => {
     getMovieData(movieId);
-  }, [movieId]); // Only depend on movieId
+    setError('');
+  }, [movieId, getMovieData]);
   
 
   const addReview = async (e) => {
     e.preventDefault();
-
+    if (pending.current) return;
     const rev = revText.current;
+    const body = rev.value.trim();
+    if (!body) {
+      setError('Write a review before submitting.');
+      return;
+    }
+    pending.current = true;
+    setSubmitting(true);
+    setError('');
 
     try {
-      console.log('Adding review:', rev.value);
-
-      const response = await api.post('/api/v1/reviews', { reviewBody: rev.value, imdbId: movieId });
-      console.log('Response:', response);
-
-      const updatedReviews = [...(reviews || []), { body: rev.value }];
-      console.log('Updated reviews:', updatedReviews);
-
+      const response = await api.post('/api/v1/reviews', { reviewBody: body, imdbId: movieId });
+      setReviews((previous) => [...(previous || []), response.data]);
       rev.value = '';
-
-      setReviews(updatedReviews);
-      console.log('Reviews updated successfully.');
     } catch (err) {
-      console.error('Error adding review:', err);
+      setError('Your review could not be saved. Please try again.');
+    } finally {
+      pending.current = false;
+      setSubmitting(false);
     }
   };
 
@@ -51,7 +57,8 @@ const Reviews = ({ getMovieData, movie, reviews, setReviews }) => {
           <>
             <Row>
               <Col>
-                <ReviewForm handleSubmit={addReview} revText={revText} labelText="Write a Review?" />
+                <ReviewForm handleSubmit={addReview} revText={revText} labelText="Write a Review?" submitting={submitting} />
+                {error && <p role="alert">{error}</p>}
               </Col>
             </Row>
             <Row>
